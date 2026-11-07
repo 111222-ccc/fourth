@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">齐新路2024110127</string>
+    <string name="tv_name">姓名：%s</string>
+    <string name="tv_gender">性别：%s</string>
+    <string name="tv_phone">电话：%s</string>
+    <string name="tv_highscore">最高分：%d</string>
+    <string name="btn_goto_game">进入翻牌游戏</string>
+    <string name="btn_edit_info">修改个人信息</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_back">返回</string>
+    <string name="score_format">Score: %d</string>
+    <string name="hint_name">请输入姓名</string>
+    <string name="hint_gender">请输入性别</string>
+    <string name="hint_phone">请输入联系电话</string>
+    <string name="score_text">分数：%d</string>
+    <string name="menu_about">关于</string>
+    <string name="about_title">关于</string>
+    <string name="about_msg">RecyclerView翻牌游戏\n实验五\n姓名：齐新路\n学号：2024110127</string>
+    <string name="btn_ok">确定</string>
+    <string name="game_over">恭喜，全部卡牌都翻完了！</string>
+    <string name="game_score">分数：0</string>
+    <string name="game_reset">重新开始</string>
+</resources>
