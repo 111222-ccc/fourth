@@ -20,4 +20,6 @@
     <string name="game_over">恭喜，全部卡牌都翻完了！</string>
     <string name="game_score">分数：0</string>
     <string name="game_reset">重新开始</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,6 +1,8 @@
 package cn.edu.sicnu.cs.stu.qxl.fifth.model
 
-class CardMatchingGame(private val cardCount: Int) {
+import java.io.Serializable
+
+class CardMatchingGame(private val cardCount: Int) : Serializable {
 
     /** 当前分数，外部只读 */
     var score: Int = 0
@@ -54,10 +56,8 @@ class CardMatchingGame(private val cardCount: Int) {
         chosenCards.clear()
     }
 
-    /** 实验要求 (4c)：reset 方法 */
     fun reset() = newGame()
 
-    /** 是否全部翻完 */
     fun isFinished(): Boolean = cards.all { it.isMatched }
 
     private fun newGame() {

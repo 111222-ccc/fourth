@@ -1,14 +1,16 @@
 package cn.edu.sicnu.cs.stu.qxl.fifth.model
 
+import java.io.Serializable
 import java.util.Random
 
-class Deck() {
+class Deck() : Serializable {
     private val cards = mutableListOf<Card>()
     private val r = Random()
+
     init {
         for (suit in Card.validSuits) {
             for (rank in Card.rankStrings) {
-                val card = Card(suit=suit,rank=rank)
+                val card = Card(suit = suit, rank = rank)
                 cards.add(card)
             }
         }

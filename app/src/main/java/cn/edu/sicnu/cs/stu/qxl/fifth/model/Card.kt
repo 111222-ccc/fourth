@@ -1,11 +1,13 @@
 package cn.edu.sicnu.cs.stu.qxl.fifth.model
 
+import java.io.Serializable
+
 class Card(
     private var suit: String,
     private var rank: String,
     var isChosen: Boolean = false,
     var isMatched: Boolean = false
-) {
+) : Serializable {
     companion object {
         val rankStrings = arrayOf("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
         val validSuits = arrayOf("♥", "♦", "♠", "♣")
@@ -24,7 +26,9 @@ class Card(
         if (otherCards.isEmpty()) return 0
         val allSameRank = otherCards.all { it.rank == rank }
         val allSameSuit = otherCards.all { it.suit == suit }
-        val multiplier = 1 + otherCards.size          // 三张牌时 = 3
+        val multiplier = 1 + otherCards.size
+
+        // 三张牌时 = 3
         return when {
             allSameRank && allSameSuit -> 4 * multiplier
             allSameRank -> 2 * multiplier

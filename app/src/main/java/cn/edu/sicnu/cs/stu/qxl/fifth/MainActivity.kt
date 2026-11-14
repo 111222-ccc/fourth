@@ -1,73 +1,40 @@
 package cn.edu.sicnu.cs.stu.qxl.fifth
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import cn.edu.sicnu.cs.stu.qxl.fifth.PlayerInfo
+import android.os.Bundle
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tvName: TextView
-    private lateinit var tvGender: TextView
-    private lateinit var tvPhone: TextView
-    private lateinit var tvHighScore: TextView
+    private lateinit var bottomNav: BottomNavigationView
+
+    // 三个Fragment，使用newInstance工厂方法
+    private val infoFragment = InfoFragment.newInstance()
+    private val twoCardFragment = TwoCardFragment.newInstance()
+    private val threeCardFragment = ThreeCardFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        bottomNav = findViewById(R.id.bottom_nav)
 
-        tvName = findViewById(R.id.tv_name)
-        tvGender = findViewById(R.id.tv_gender)
-        tvPhone = findViewById(R.id.tv_phone)
-        tvHighScore = findViewById(R.id.tv_highscore)
-
-        val btnEdit: Button = findViewById(R.id.btn_edit)
-        val btnGame: Button = findViewById(R.id.btn_game)
-
-        btnEdit.setOnClickListener {
-            val intent = Intent(this, EditInfoActivity::class.java)
-            startActivity(intent)
+        // 首次打开默认加载【个人信息】Fragment
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, infoFragment)
+                .commit()
         }
 
-        btnGame.setOnClickListener {
-            val intent = Intent(this, CardGameActivity::class.java)
-            startActivity(intent)
+        // 底部导航点击切换Fragment
+        bottomNav.setOnNavigationItemSelectedListener { item ->
+            val transaction = supportFragmentManager.beginTransaction()
+            when (item.itemId) {
+                R.id.nav_info -> transaction.replace(R.id.fragment_container, infoFragment)
+                R.id.nav_two_card -> transaction.replace(R.id.fragment_container, twoCardFragment)
+                R.id.nav_three_card -> transaction.replace(R.id.fragment_container, threeCardFragment)
+            }
+            transaction.commit()
+            true
         }
-    }
-
-    //加载右上角菜单
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    //菜单点击事件，把硬编码“确定”改为字符串资源R.string.btn_ok，符合实验要求
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.item_about) {
-            AlertDialog.Builder(this)
-                .setTitle(R.string.about_title)
-                .setMessage(R.string.about_msg)
-                .setPositiveButton(R.string.btn_ok, null)
-                .show()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        refreshInfoUi()
-    }
-
-    private fun refreshInfoUi() {
-        tvName.text = getString(R.string.tv_name, PlayerInfo.name)
-        tvGender.text = getString(R.string.tv_gender, PlayerInfo.gender)
-        tvPhone.text = getString(R.string.tv_phone, PlayerInfo.phone)
-        tvHighScore.text = getString(R.string.tv_highscore, PlayerInfo.highScore)
     }
 }
